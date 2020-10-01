@@ -1,0 +1,386 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+$colors: (
+  //Dark Mode Elements
+  dBlue: hsl(209, 23%, 22%),
+  //Dark Mode Background
+  vdBlueBG: hsl(207, 26%, 17%),
+  //Light Mode Text
+  vdBlueText: hsl(200, 15%, 8%),
+  //Light Mode Input
+  dGray: hsl(0, 0%, 52%),
+  //Light Mode Background
+  vlGray: hsl(0, 0%, 98%),
+  //Dark Mode Text & Light Mode Elements
+  white: hsl(0, 0%, 100%)
+);
+
+@function color ($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+$home-mobile: 850px;
+
+@mixin home-mobile {
+  @media (max-width: #{$home-mobile}) {
+    @content;
+  }
+}
+
+$countries-smaller: 1300px;
+
+@mixin countries-smaller {
+  @media (max-width: #{$countries-smaller}) {
+    @content;
+  }
+}
+
+.nav-bar-light {
+  background-color: white;
+  color: color(vdBlueText);
+  box-shadow: 0px 0px 11px 4px rgba(168,168,168,0.1);
+}
+
+.nav-bar-dark {
+  background-color: color(dBlue);
+  color: white;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0 80px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-bar {
+  height: 80px;
+  position: relative;
+  z-index: 2;
+  .container {
+    @include home-mobile {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .home-link {
+      text-decoration: none;
+      font-weight: 800;
+      color: inherit;
+      font-size: 1.5rem;
+      @include home-mobile {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+    }
+    .dark-mode-btn {
+      background: transparent;
+      border-style: none;
+      cursor: pointer;
+      padding: 10px 0 10px 10px;
+      color: inherit;
+      font-weight: 600;
+      font-size: 1rem;
+      span {
+        margin-right: 10px;
+        color: inherit;
+      }
+    }
+  }
+}
+
+.dark {
+  color: color(white);
+  background-color: color(vdBlueBG);
+}
+
+.dark-element {
+  color: color(white);
+  background-color: color(dBlue);
+}
+
+.main-light {
+  color: color(vdBlueText);
+  background-color: color(vlGray);
+}
+
+.main-dark {
+  color: white;
+  background-color: color(vdBlueBG);
+}
+
+.element-light {
+  background-color: white;
+  color: color(vdBlueText);
+  box-shadow: 0px 0px 11px 4px rgba(168,168,168,0.1);
+}
+
+.element-dark {
+  background-color: color(dBlue);
+  color: white;
+}
+
+.home {
+  min-height: calc(100vh - 80px);
+  .container {
+    @include home-mobile {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .search-and-filter {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 50px;
+      height: 60px;
+      @include home-mobile {
+        height: 180px;
+        flex-direction: column;
+      }
+      form {
+        color: inherit;
+        display: flex;
+        align-items: center;
+        max-width: 480px;
+        width: 100%;
+        height: 60px;
+        border-radius: 6px;
+        margin-right: 10px;
+        overflow: hidden;
+        .search-icon-wrapper {
+          color: color(dGray);
+          font-size: 1.1rem;
+          padding-left: 30px;
+          padding-right: 25px;
+        }
+        input {
+          color: inherit;
+          background-color: inherit;
+          width: 100%;
+          height: 100%;
+          border-style: none;
+          font-size: 0.9rem;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .region-filter-wrapper {
+        max-width: 200px;
+        width: 100%;
+        height: 60px;
+        position: relative;
+        border-radius: 6px;
+        button {
+          background-color: inherit;
+          color: inherit;
+          border: none;
+          border-radius: 6px;
+          box-shadow: inherit;
+          padding: 20px 20px 20px 25px;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          font-size: 0.9rem;
+          font-weight: 600;
+          &:focus {
+            outline: none;
+          }
+        }
+        .region-filter-choices {
+          position: absolute;
+          margin-top: 4px;
+          width: 100%;
+          background-color: inherit;
+          color: inherit;
+          border-radius: 6px;
+          z-index: 2;
+          box-shadow: inherit;
+          ul {
+            list-style: none;
+            padding-left: 24px;
+            li {
+              cursor: pointer;
+              margin-bottom: 10px;
+              font-weight: 600;
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+    .countries {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin: -75px 0 0 -30px;
+      width: calc(100% + 30px);
+      @include home-mobile {
+        justify-content: center;
+      }
+      .country-card {
+        margin: 75px 0 0 30px;
+        height: 335px;
+        width: 265px;
+        border-radius: 6px;
+        overflow: hidden;
+        cursor: pointer;
+        &:hover {
+          transition: transform 0.5s ease;
+          transform: scale(1.1, 1.1);
+        }
+        .flag-container {
+          height: 160px;
+          overflow: hidden;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        .country-info-container {
+          padding: 30px 20px;
+          background-color: inherit;
+          color: inherit;
+          strong {
+            font-weight: 600;
+          }
+          h3 {
+            margin-top: 0;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+          ul {
+            list-style: none;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.country-page {
+  min-height: calc(100vh - 80px);
+  .container {
+    padding-bottom: 50px;
+    @include home-mobile {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    .back-wrapper {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      @include home-mobile {
+        height: 150px;
+      }
+      .back-btn {
+        width: 135px;
+        height: 40px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.1, 1.1);
+          transition: transform 0.2s ease;
+        }
+        .back-arrow-wrapper {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  main {
+    display: flex;
+    @include home-mobile {
+      flex-direction: column;
+    }
+    .flag-wrapper {
+      max-width: 560px;
+      width: 100%;
+      height: 400px;
+      @include home-mobile {
+        height: auto;
+      }
+      display: flex;
+      align-items: center;
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .country-info-wrapper {
+      padding: 30px 0 0 120px;
+      @include countries-smaller {
+        padding-left: 60px;
+      }
+      @include home-mobile {
+        padding-left: 0;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .list-wrapper {
+          ul {
+            list-style: none;
+            padding: 0;
+            //display: flex;
+            //flex-direction: column;
+            //flex-wrap: wrap;
+            column-count: 2;
+            column-gap: 20px;
+            @include countries-smaller {
+              column-count: 1;
+            }
+            li {
+              margin-bottom: 5px;
+              strong {
+                font-weight: 600;
+              }
+            }
+          }
+        }
+        .neighbors-wrapper {
+          .neighbor-btn {
+            margin: 0 10px 10px 10px;
+            padding: 3px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            &:hover {
+              transform: scale(1.1, 1.1);
+              transition: transform 0.2s ease;
+            }
+          }
+        }
+    }
+  }
+}
