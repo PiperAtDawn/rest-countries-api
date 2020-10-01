@@ -139,6 +139,14 @@ $countries-smaller: 1300px;
   color: white;
 }
 
+.all-countries {
+  justify-content: space-between;
+}
+
+.two-countries {
+  
+}
+
 .home {
   min-height: calc(100vh - 80px);
   .container {
@@ -236,7 +244,6 @@ $countries-smaller: 1300px;
     }
     .countries {
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
       margin: -75px 0 0 -30px;
       width: calc(100% + 30px);

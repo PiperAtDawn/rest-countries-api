@@ -73,7 +73,7 @@ function Home({countries, darkMode}) {
                 </div>
               </div>
             </div>
-              <div className="countries">
+              <div className={filteredCountries.length === 2 ? "countries" : "countries all-countries"}>
                 {filteredCountries.map(country => (
                     <CountryCard
                     key={country.name}
